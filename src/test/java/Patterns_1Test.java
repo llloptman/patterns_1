@@ -40,13 +40,13 @@ class Patterns_1Test {
         clearBrowserCookies();
         clearBrowserLocalStorage();
 
-    System.out.println(city + "/n" +
-            name + "/n" +
-            phone);
+    System.out.println("Город " + city + "\n" +
+            "Имя " + name + "\n" +
+            "Телефон " + phone);
 
-    System.out.println(user.getCity() + "/n" +
-            user.getName() + "/n" +
-            user.getPhone());
+    System.out.println("Город " + user.getCity() + "\n" +
+            "Имя " + user.getName() + "\n" +
+            "Телефон " + user.getPhone());
     }
 
     @Test
