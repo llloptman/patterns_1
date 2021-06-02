@@ -40,7 +40,13 @@ class Patterns_1Test {
         clearBrowserCookies();
         clearBrowserLocalStorage();
 
+    System.out.println(city + "/n" +
+            name + "/n" +
+            phone);
 
+    System.out.println(user.getCity() + "/n" +
+            user.getName() + "/n" +
+            user.getPhone());
     }
 
     @Test
@@ -83,5 +89,21 @@ class Patterns_1Test {
                 .text(replanDate));
 
     }
+    @Test
+    void ShouldFailGenerateSeparately() {
+        fillInTheFormSeparatly(city,date,name,phone);
+        $(".button").click();
+        $("[data-test-id='success-notification']").shouldBe(Condition.visible, Duration.ofSeconds(15));
+        $("[data-test-id='success-notification'] button").click();
+        Selenide.refresh();
+        fillInTheFormSeparatly(city,replanDate,name,phone);
+        $(".button").click();
+        $("[data-test-id='replan-notification']").shouldBe(Condition.visible, Duration.ofSeconds(15));
+        $("[data-test-id='replan-notification'] button").click();
+        $(new Selectors.WithText("Успешно!")).shouldBe(Condition.visible, Duration.ofSeconds(15));
+        $(".notification__content").shouldHave(Condition
+                .text(replanDate));
+    }
+
 
 }
