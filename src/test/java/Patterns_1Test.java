@@ -90,8 +90,8 @@ class Patterns_1Test {
 
     }
     @Test
-    void ShouldFailByName() {
-        fillInTheFormSeparatly(city,date,"Лёха",phone);
+    void ShouldFailByCity() {
+        fillInTheFormSeparatly("Сочи",date,name,phone);
         $(".button").click();
         $("[data-test-id='success-notification']").shouldBe(Condition.visible, Duration.ofSeconds(15));
         $("[data-test-id='success-notification'] button").click();
