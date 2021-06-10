@@ -1,3 +1,5 @@
+package tests;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.Selenide;
@@ -29,28 +31,11 @@ class Patterns_1Test {
         $("[name='phone']").setValue(phone);
         $(".checkbox__box").click();
     }
-    public void checkCity(String city){
 
-        int count = 1;
-        for (int i = 0; i < count; i++) {
-            try {
-                $("[placeholder='Город']").setValue(city);
-                $$(".menu-item__control").find(new Text(city)).click();
-                $("[placeholder='Город']").shouldHave(Condition.value(city));
-            }catch (ElementNotFound e){
-                count++;
-                $("[placeholder='Город']").sendKeys(Keys.CONTROL + "A", Keys.DELETE);
-                city = DataGenerator.generateCity("ru-RU");
-                this.city = city;
-            }finally {
-                $("[placeholder='Город']").sendKeys(Keys.CONTROL + "A", Keys.DELETE);
-            }
-        }
-    }
 
 @BeforeEach
     void init() {
-        city = DataGenerator.generateCity("ru-RU");
+        city = DataGenerator.generateCity();
         date = DataGenerator.generateDate(5);
         replanDate = DataGenerator.generateDate(3);
         name = DataGenerator.generateName("ru-RU");
@@ -59,18 +44,6 @@ class Patterns_1Test {
         open("http://localhost:9999/");
         clearBrowserCookies();
         clearBrowserLocalStorage();
-
-        // проверка, что генерируются только верные города (т.к. есть проблемы с некоторыми городами, например Сочи)
-        checkCity(city);
-        checkCity(user.getCity());
-        //Вывод данных в консоль, чтоб было видно сгенерированные данные
-        System.out.println("Город " + city + "\n" +
-            "Имя " + name + "\n" +
-            "Телефон " + phone);
-
-        System.out.println("Город " + user.getCity() + "\n" +
-            "Имя " + user.getName() + "\n" +
-            "Телефон " + user.getPhone());
     }
 
     @Test
